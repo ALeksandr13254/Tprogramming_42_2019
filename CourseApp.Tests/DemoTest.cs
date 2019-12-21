@@ -72,7 +72,6 @@ namespace CourseApp.Tests
             }
             catch (System.ArgumentOutOfRangeException)
             {
-                Console.WriteLine("dx > xk-xn");
                 Assert.True(true);
             }
         }
@@ -88,7 +87,6 @@ namespace CourseApp.Tests
             }
             catch (System.ArgumentOutOfRangeException)
             {
-                Console.WriteLine("xn > xk");
                 Assert.True(true);
             }
         }

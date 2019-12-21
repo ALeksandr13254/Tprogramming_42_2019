@@ -36,7 +36,7 @@ namespace CourseApp
             {
                 if (value >= 0 && value <= 20)
                 {
-                    base.age = value;
+                    base.Age = value;
                 }
                 else
                 {

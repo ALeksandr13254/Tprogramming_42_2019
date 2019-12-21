@@ -22,7 +22,7 @@ namespace CourseApp
         }
 
         public Airplane(string model, int age, string produced)
-        : base(name, age)
+        : base(model, age)
         {
             Produced = produced;
         }
@@ -42,14 +42,14 @@ namespace CourseApp
             }
         }
 
-        public string Model { get; set; }
+        public string Produced { get; set; }
 
         public override string ToString()
         {
             return $"Модель:{Model}, Возраст:{Age}, Производитель:{Produced}";
         }
 
-        public void Sound()
+        public override void Sound()
         {
             Console.WriteLine("ШФРУХХТТТ!");
         }

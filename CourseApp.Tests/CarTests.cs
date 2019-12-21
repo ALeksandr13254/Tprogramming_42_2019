@@ -61,7 +61,6 @@ namespace CourseApp.Tests
             }
             catch (System.Exception)
             {
-                Console.WriteLine("Speed should be > 0");
                 Assert.True(true);
             }
         }
@@ -77,7 +76,6 @@ namespace CourseApp.Tests
             }
             catch (System.Exception)
             {
-                Console.WriteLine("Speed should be > 0");
                 Assert.True(true);
             }
 
@@ -93,11 +91,10 @@ namespace CourseApp.Tests
             var item = new Car();
             try
             {
-                item.Sound();
+                item.ToString();
             }
             catch (System.Exception)
             {
-                Console.WriteLine("Error toString");
                 Assert.True(true);
             }
 
@@ -114,7 +111,6 @@ namespace CourseApp.Tests
             }
             catch (System.Exception)
             {
-                Console.WriteLine("Error sound");
                 Assert.True(true);
             }
 
@@ -141,7 +137,6 @@ namespace CourseApp.Tests
             }
             catch (System.Exception)
             {
-                Console.WriteLine("Error braking");
                 Assert.True(true);
             }
 

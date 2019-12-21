@@ -58,11 +58,13 @@ namespace CourseApp
 
             Vehicle[] objects = new Vehicle[2];
             objects[0] = new Car("ModelCar", 3, 3);
-            objects[1] = new Cat("ModelAirplane", 5, "");
+            objects[1] = new Airplane("ModelAirplane", 5, "Produced");
             foreach (var item in objects)
             {
                 item.Sound();
             }
+
+            Console.WriteLine(AgeC.Age());
         }
     }
 }

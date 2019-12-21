@@ -39,12 +39,12 @@ namespace CourseApp
 
         public override string ToString()
         {
-            return $"Модель:{Model},Возраст:{Age}";
+            return $"Модель:{Model}, Возраст:{Age}";
         }
 
         public void Use()
         {
-            this.age++;
+            this.Age++;
         }
 
         public abstract void Sound();
