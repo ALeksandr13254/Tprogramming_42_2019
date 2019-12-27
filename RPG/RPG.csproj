@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <NoWarn>1573,1591,1701;1702;1705;</NoWarn>
+    <UseNETCoreGenerator>true</UseNETCoreGenerator>
+    <TargetFrameworks>netcoreapp2.1;netstandard2.0</TargetFrameworks>
+    <AzureFunctionsVersion>v2</AzureFunctionsVersion>
+    <UseNETCoreGenerator>true</UseNETCoreGenerator>
+  </PropertyGroup>
+
+   <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" PrivateAssets="all" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>../_stylecop/stylecop.ruleset</CodeAnalysisRuleSet> 
+    <GenerateFullPaths>true</GenerateFullPaths> 
+    <StartupObject>RPG.MainRPG</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="../_stylecop/stylecop.json" />
+  </ItemGroup>
+
+</Project>
+
