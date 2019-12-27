@@ -17,33 +17,26 @@ namespace CourseApp
             return res;
         }
 
-        public static string Age(int day, int month, int year)
-        {
-            DateTime res = DatComp(new DateTime(year, month, day), DateTime.Now);
-            return $"Тебе {res.Year - 1} лет, {res.Month - 1} месяцев и {res.Day - 1} дней";
-        }
-
         public static DateTime DatComp(DateTime dat1, DateTime dat2)
         {
             if (dat1.Ticks < dat2.Ticks)
             {
-                var res = new DateTime(dat2.Ticks - dat1.Ticks);
+                DateTime res = new DateTime(dat2.Ticks - dat1.Ticks);
                 return res;
             }
 
             throw new Exception();
         }
 
-        public static string Age(DateTime dat1, DateTime dat2)
+        public static string Age(DateTime fromDate, DateTime toDate)
         {
-            var datComp = DatComp(dat1, dat2);
-            return $"Тебе {datComp.Year - 1} лет, {datComp.Month - 1} месяцев и {datComp.Day - 1} дней";
+            var datCompar = DatComp(fromDate, toDate);
+            return $"Тебе {datCompar.Year - 1} лет, {datCompar.Month - 1} месяцев и {datCompar.Day - 1} дней";
         }
 
         public static string Age(DateTime dat)
         {
-            var datComp = DatComp(dat, DateTime.Now);
-            return $"Тебе {datComp.Year - 1} лет, {datComp.Month - 1} месяцев и {datComp.Day - 1} дней";
+            return Age(dat, DateTime.Now);
         }
     }
 }
