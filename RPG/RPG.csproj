@@ -18,7 +18,7 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>../_stylecop/stylecop.ruleset</CodeAnalysisRuleSet> 
     <GenerateFullPaths>true</GenerateFullPaths> 
-    <StartupObject>RPG.MainRPG</StartupObject>
+    <StartupObject>RPG.Game</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
