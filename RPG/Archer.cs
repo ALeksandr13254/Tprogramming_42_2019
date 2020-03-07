@@ -19,8 +19,8 @@ namespace RPG
         public Archer(string name, Player opponent)
         : base(name, opponent)
         {
+            Skills.Add(new ArcherSkill());
             Class = "Лучник";
-            Usingskill = new ArcherSkill();
         }
     }
 }
