@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -10,6 +11,7 @@ namespace RPG
         private static Random rand = new Random();
 
         public Player()
+
         : this("Без имени")
         {
         }
@@ -21,8 +23,11 @@ namespace RPG
 
         public Player(string name, Player opponent)
         {
+            Skills = new List<IUseSkill>();
+            Effects = new List<string>();
             this.Name = name;
             this.Opponent = opponent;
+            Skills.Add(new Attack());
         }
 
         public string Class { get; protected set; }
@@ -35,61 +40,31 @@ namespace RPG
 
         public int Strength { get; } = rand.Next(1, 101);
 
-        public bool IsDebuffed { get; set; } = false;
+        public List<IUseSkill> Skills { get; set; }
 
-        public bool IsSkipped { get; set; } = false;
+        public List<string> Effects { get; set; }
 
-        public bool SkillUsed { get; set; } = false;
-
-        internal IUseSkill Usingskill { get; set; }
-
-        public void Skip()
-        {
-        }
-
-        public virtual void Attack()
-        {
-            if (!IsSkipped)
-            {
-                if (!IsDebuffed)
-                {
-                    Opponent.Hp -= Strength;
-                    Logger.LogMessage($"({Class}) {Name} наносит урон {Strength} противнику ({Opponent.Class}) {Opponent.Name}.");
-                }
-                else
-                {
-                    Hp -= 2;
-                    Logger.LogMessage($"({Class}) {Name} получает урон 2 от (Огненные стрелы).");
-                    Opponent.Hp -= Strength;
-                    Logger.LogMessage($"({Class}) {Name} наносит урон {Strength} противнику ({Opponent.Class}) {Opponent.Name}.");
-                }
-            }
-            else
-            {
-                Logger.LogMessage($"({Class}) {Name} пропускает ход.");
-                IsSkipped = false;
-            }
-        }
+        public IUseSkill UsingSkill { get; set; }
 
         public void UseSkill()
         {
-            if (!IsSkipped)
+            if (!Effects.Any(item => item == "Заворожение"))
             {
-                if (!IsDebuffed)
+                if (!Effects.Any(item => item == "Огненные стрелы"))
                 {
-                    Usingskill.UseSkill(this);
+                    UsingSkill.UseSkill(this);
                 }
                 else
                 {
                     Hp -= 2;
                     Logger.LogMessage($"({Class}) {Name} получает урон 2 от (Огненные стрелы).");
-                    Usingskill.UseSkill(this);
+                    UsingSkill.UseSkill(this);
                 }
             }
             else
             {
                 Logger.LogMessage($"({Class}) {Name} пропускает ход.");
-                IsSkipped = false;
+                Effects.Remove("Заворожение");
             }
         }
     }

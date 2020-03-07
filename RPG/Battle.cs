@@ -11,23 +11,17 @@ namespace RPG
             Random rand = new Random();
             while (p.Hp > 0 && p.Opponent.Hp > 0)
             {
-                int useSkill1 = rand.Next(0, 2);
-                int useSkill2 = rand.Next(0, 2);
-                if (useSkill1 == 0 && p.Hp > 0)
+                int randomSkill1 = rand.Next(0, p.Skills.Count);
+                int randomSkill2 = rand.Next(0, p.Opponent.Skills.Count);
+                if (p.Hp > 0)
                 {
-                    p.Attack();
-                }
-                else if (useSkill1 == 1 && p.Hp > 0)
-                {
+                    p.UsingSkill = p.Skills[randomSkill1];
                     p.UseSkill();
                 }
 
-                if (useSkill2 == 0 && p.Opponent.Hp > 0)
+                if (p.Opponent.Hp > 0)
                 {
-                    p.Opponent.Attack();
-                }
-                else if (useSkill2 == 1 && p.Opponent.Hp > 0)
-                {
+                    p.Opponent.UsingSkill = p.Opponent.Skills[randomSkill2];
                     p.Opponent.UseSkill();
                 }
             }
@@ -36,14 +30,14 @@ namespace RPG
             {
                 Logger.LogMessage($"({p.Class}) {p.Name} погиб!\n");
                 p.Opponent.Hp = rand.Next(1, 100);
-                p.Opponent.IsDebuffed = false;
+                p.Opponent.Effects.Remove("Огненные стрелы");
                 return p;
             }
             else if (p.Opponent.Hp < 1)
             {
                 Logger.LogMessage($"({p.Opponent.Class}) {p.Opponent.Name} погиб!\n");
                 p.Hp = rand.Next(1, 100);
-                p.IsDebuffed = false;
+                p.Effects.Remove("Огненные стрелы");
                 return p.Opponent;
             }
 
