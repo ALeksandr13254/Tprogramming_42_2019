@@ -8,6 +8,7 @@ namespace RPG
     {
         public static Player BattlePlayers(Player p)
         {
+            Logger.LogBattle(p);
             Random rand = new Random();
             while (p.Hp > 0 && p.Opponent.Hp > 0)
             {
