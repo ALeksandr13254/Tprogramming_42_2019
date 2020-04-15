@@ -23,5 +23,5 @@ jobs:
         dotnet test
     - name: Run tests
       run: |
-        cd RPG
+        cd RPG       
         dotnet build --configuration Release
