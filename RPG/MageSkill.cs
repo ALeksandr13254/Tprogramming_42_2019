@@ -8,7 +8,7 @@ namespace RPG
     {
         public void UseSkill(Player user)
         {
-            user.Opponent.IsSkipped = true;
+            user.Opponent.Effects.Add(new Skip());
             Logger.LogMessage($"({user.Class}) {user.Name} использует (Заворожение) на ({user.Opponent.Class}) {user.Opponent.Name}.");
         }
     }

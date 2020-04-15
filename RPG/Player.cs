@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -15,14 +16,13 @@ namespace RPG
         }
 
         public Player(string name)
-        : this(name, null)
         {
-        }
-
-        public Player(string name, Player opponent)
-        {
-            this.Name = name;
-            this.Opponent = opponent;
+            Name = name;
+            Hp = rand.Next(1, 100);
+            Strength = rand.Next(1, 99);
+            Skills = new List<IUseSkill>();
+            Effects = new List<IEffects>();
+            Skills.Add(new Attack());
         }
 
         public string Class { get; protected set; }
@@ -31,65 +31,30 @@ namespace RPG
 
         public Player Opponent { get; set; } = null;
 
-        public double Hp { get; set; } = rand.Next(1, 101);
+        public double Hp { get; set; }
 
-        public int Strength { get; } = rand.Next(1, 101);
+        public int Strength { get; }
 
-        public bool IsDebuffed { get; set; } = false;
+        public bool IsStunned { get; set; }
 
-        public bool IsSkipped { get; set; } = false;
+        public IUseSkill Usingskill { get; set; }
 
-        public bool SkillUsed { get; set; } = false;
+        public List<IUseSkill> Skills { get; set; }
 
-        internal IUseSkill Usingskill { get; set; }
-
-        public void Skip()
-        {
-        }
-
-        public virtual void Attack()
-        {
-            if (!IsSkipped)
-            {
-                if (!IsDebuffed)
-                {
-                    Opponent.Hp -= Strength;
-                    Logger.LogMessage($"({Class}) {Name} наносит урон {Strength} противнику ({Opponent.Class}) {Opponent.Name}.");
-                }
-                else
-                {
-                    Hp -= 2;
-                    Logger.LogMessage($"({Class}) {Name} получает урон 2 от (Огненные стрелы).");
-                    Opponent.Hp -= Strength;
-                    Logger.LogMessage($"({Class}) {Name} наносит урон {Strength} противнику ({Opponent.Class}) {Opponent.Name}.");
-                }
-            }
-            else
-            {
-                Logger.LogMessage($"({Class}) {Name} пропускает ход.");
-                IsSkipped = false;
-            }
-        }
+        public List<IEffects> Effects { get; set; }
 
         public void UseSkill()
         {
-            if (!IsSkipped)
             {
-                if (!IsDebuffed)
-                {
-                    Usingskill.UseSkill(this);
-                }
-                else
-                {
-                    Hp -= 2;
-                    Logger.LogMessage($"({Class}) {Name} получает урон 2 от (Огненные стрелы).");
-                    Usingskill.UseSkill(this);
-                }
+                Usingskill.UseSkill(this);
             }
-            else
+        }
+
+        public void ProcEffects()
+        {
+            for (int i = 0; i < Effects.Count; i++)
             {
-                Logger.LogMessage($"({Class}) {Name} пропускает ход.");
-                IsSkipped = false;
+                    Effects[i].Proc(this);
             }
         }
     }
