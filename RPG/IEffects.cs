@@ -6,6 +6,6 @@ namespace RPG
 {
     public interface IEffects
     {
-        void Proc(Player owner);
+        void Srabat(Player owner);
     }
 }

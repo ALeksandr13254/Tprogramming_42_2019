@@ -14,7 +14,7 @@ namespace RPG
             {
                 int randomSkill1 = rand.Next(0, p.Skills.Count);
                 int randomSkill2 = rand.Next(0, p.Opponent.Skills.Count);
-                p.ProcEffects();
+                p.SrabatEffects();
                 if (p.IsStunned == false)
                 {
                     p.Usingskill = p.Skills[randomSkill1];
@@ -33,7 +33,7 @@ namespace RPG
                     }
                 }
 
-                p.Opponent.ProcEffects();
+                p.Opponent.SrabatEffects();
 
                 if (p.Opponent.Hp > 0)
                 {
@@ -45,11 +45,11 @@ namespace RPG
                     else
                     {
                         p.Opponent.IsStunned = false;
-                        for (int i = 0; i < p.Effects.Count; i++)
+                        for (int i = 0; i < p.Opponent.Effects.Count; i++)
                         {
-                            if (p.Effects[i] is Skip)
+                            if (p.Opponent.Effects[i] is Skip)
                             {
-                                p.Effects.RemoveAt(i);
+                                p.Opponent.Effects.RemoveAt(i);
                                 i--;
                             }
                         }

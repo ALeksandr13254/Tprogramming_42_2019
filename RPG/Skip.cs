@@ -6,7 +6,7 @@ namespace RPG
 {
     public class Skip : IEffects
     {
-        public void Proc(Player owner)
+        public void Srabat(Player owner)
         {
             owner.IsStunned = true;
             Logger.LogMessage($"({owner.Class}) {owner.Name} пропускает ход.");

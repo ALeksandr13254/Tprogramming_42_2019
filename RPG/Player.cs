@@ -50,11 +50,11 @@ namespace RPG
             }
         }
 
-        public void ProcEffects()
+        public void SrabatEffects()
         {
             for (int i = 0; i < Effects.Count; i++)
             {
-                    Effects[i].Proc(this);
+                    Effects[i].Srabat(this);
             }
         }
     }
