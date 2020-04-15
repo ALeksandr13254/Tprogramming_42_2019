@@ -12,10 +12,15 @@ namespace RPG
         }
 
         public Mage(string name)
-        : base(name)
+        : this(name, null)
+        {
+        }
+
+        public Mage(string name, Player opponent)
+        : base(name, opponent)
         {
             Class = "Маг";
-            Skills.Add(new MageSkill());
+            Usingskill = new MageSkill();
         }
     }
 }

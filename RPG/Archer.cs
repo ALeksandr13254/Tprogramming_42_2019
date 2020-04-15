@@ -12,10 +12,15 @@ namespace RPG
         }
 
         public Archer(string name)
-        : base(name)
+        : this(name, null)
+        {
+        }
+
+        public Archer(string name, Player opponent)
+        : base(name, opponent)
         {
             Class = "Лучник";
-            Skills.Add(new ArcherSkill());
+            Usingskill = new ArcherSkill();
         }
     }
 }

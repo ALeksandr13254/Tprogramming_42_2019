@@ -11,48 +11,24 @@ namespace RPG
             Random rand = new Random();
             while (p.Hp > 0 && p.Opponent.Hp > 0)
             {
-                int randomSkill1 = rand.Next(0, p.Skills.Count);
-                int randomSkill2 = rand.Next(0, p.Opponent.Skills.Count);
-                p.ProcEffects();
-                if (p.IsStunned == false)
+                int useSkill1 = rand.Next(0, 2);
+                int useSkill2 = rand.Next(0, 2);
+                if (useSkill1 == 0 && p.Hp > 0)
                 {
-                    p.Usingskill = p.Skills[randomSkill1];
+                    p.Attack();
+                }
+                else if (useSkill1 == 1 && p.Hp > 0)
+                {
                     p.UseSkill();
                 }
-                else
+
+                if (useSkill2 == 0 && p.Opponent.Hp > 0)
                 {
-                    p.IsStunned = false;
-                    for (int i = 0; i < p.Effects.Count; i++)
-                    {
-                        if (p.Effects[i] is Skip)
-                        {
-                            p.Effects.RemoveAt(i);
-                            i--;
-                        }
-                    }
+                    p.Opponent.Attack();
                 }
-
-                p.Opponent.ProcEffects();
-
-                if (p.Opponent.Hp > 0)
+                else if (useSkill2 == 1 && p.Opponent.Hp > 0)
                 {
-                    if (p.Opponent.IsStunned == false)
-                    {
-                        p.Opponent.Usingskill = p.Opponent.Skills[randomSkill2];
-                        p.Opponent.UseSkill();
-                    }
-                    else
-                    {
-                        p.Opponent.IsStunned = false;
-                        for (int i = 0; i < p.Effects.Count; i++)
-                        {
-                            if (p.Effects[i] is Skip)
-                            {
-                                p.Effects.RemoveAt(i);
-                                i--;
-                            }
-                        }
-                    }
+                    p.Opponent.UseSkill();
                 }
             }
 
@@ -60,14 +36,14 @@ namespace RPG
             {
                 Logger.LogMessage($"({p.Class}) {p.Name} погиб!\n");
                 p.Opponent.Hp = rand.Next(1, 100);
-                p.Opponent.Effects.Clear();
+                p.Opponent.IsDebuffed = false;
                 return p;
             }
             else if (p.Opponent.Hp < 1)
             {
                 Logger.LogMessage($"({p.Opponent.Class}) {p.Opponent.Name} погиб!\n");
                 p.Hp = rand.Next(1, 100);
-                p.Effects.Clear();
+                p.IsDebuffed = false;
                 return p.Opponent;
             }
 

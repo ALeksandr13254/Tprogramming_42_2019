@@ -21,7 +21,3 @@ jobs:
       run: |
         cd CourseApp.Tests
         dotnet test
-    - name: Run tests
-      run: |
-        cd RPG
-        dotnet build --configuration Release

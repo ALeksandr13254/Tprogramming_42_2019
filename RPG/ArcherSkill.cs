@@ -6,20 +6,17 @@ namespace RPG
 {
     public class ArcherSkill : IUseSkill
     {
-        private int timeSkillUsed = 0;
-
         public void UseSkill(Player user)
         {
-            if (timeSkillUsed < 1)
+            if (!user.SkillUsed)
             {
-                user.Opponent.Effects.Add(new FireArrow());
+                user.Opponent.IsDebuffed = true;
                 Logger.LogMessage($"({user.Class}) {user.Name} использует (Огненные стрелы) на ({user.Opponent.Class}) {user.Opponent.Name}.");
-                timeSkillUsed++;
+                user.SkillUsed = true;
             }
             else
             {
-                user.Usingskill = new Attack();
-                user.UseSkill();
+                user.Attack();
             }
         }
     }
